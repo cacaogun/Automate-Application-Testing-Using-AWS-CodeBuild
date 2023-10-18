@@ -58,6 +58,7 @@ wins = [
   [2, 4, 6],
   [0, 3, 6],
 ];
+
 **Fix error: PageHeader.test.js confirm that the header renders**
 This test is looking for the text “Tic-Tac-Toe!” in the header, but the actual text in the header doesn’t have an exclamation mark on it. You will have to check with the marketing department to see which title is correct.
 This file instructs the test runner what to do to test your application. It starts by importing the testing libraries, GameBoard component, and creates a variable that is used when looping through all buttons
