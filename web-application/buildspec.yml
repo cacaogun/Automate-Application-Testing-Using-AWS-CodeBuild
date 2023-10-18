@@ -1,0 +1,39 @@
+version: 0.2
+env:
+  variables:
+    CI: true
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - cd react-app
+      - npm install --silent
+  build:
+    commands:
+    - npm run test:ci -- --coverage       # Add tests to detect issues if they are not run
+    - npm run build
+artifacts:
+  files:
+    - '**/*'
+  base-directory: react-app/build
+
+  #With the change you just made, the build will only succeed if the application tests pass. The test results and failures are not as visible or easy to interpret as they can be yet. 
+  #To increase visibility and clarity, CodeBuild has support to display test and coverage reports exported by your frameworks. 
+  #Your test frameworks have been configured to create both types of reports that you will export.
+  #The reports section of the buildspec is where you specify the report files you want to export to CodeBuild. You can export test reports and/or code coverage reports. For test reports, CodeBuild supports the following formats: 
+  #Cucumber JSON, JUnit XML, NUnit XML, NUnit3 XML, TestNG XML, and Visual Studio TRX. For code coverage reports, you can use the following formats: JaCoCo XML, SimpleCov JSON, Clover XML, and Cobertura XML.
+
+reports:
+  web-application:
+    files:
+      - "clover.xml"
+    base-directory: "react-app/coverage"
+    discard-paths: yes
+    file-format: CLOVERXML
+  web-application-tests:
+    files:
+      - "junit.xml"
+    base-directory: "react-app"
+    discard-paths: yes
+    file-format: JUNITXML
