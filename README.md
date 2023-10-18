@@ -29,7 +29,8 @@ Add the following command as the first command in the list of commands in the bu
 
 With the change I just made, the build will only succeed if the application tests pass. The test results and failures are not as visible or easy to interpret as they can be yet. To increase visibility and clarity, CodeBuild has support to display test and coverage reports exported by frameworks. Test frameworks have been configured to create both types of reports that will export. At the end of the buildspec file, add the following reports section and save it.
 
-```reports:
+```
+reports:
 
   web-application:
   
@@ -53,7 +54,8 @@ With the change I just made, the build will only succeed if the application test
     
     discard-paths: yes
     
-    file-format: JUNITXML```
+    file-format: JUNITXML
+```
     
 Then commit changes locally and push them to the shared AWS CodeCommit repository.
 
@@ -71,7 +73,7 @@ Get back to the Cloud9 Terminal. We could see that two tests failed and seven te
 
 **Fix error: GameBoard.test.js the game can be won by X**
 On line 17 of the GameBoard.test.js, there is an array of possible winning combinations, it appears that the combination being tested, [0,3,6], is not there. Add these codes:
-
+```
 wins = [
 
   [0, 1, 2],
@@ -91,6 +93,7 @@ wins = [
   [0, 3, 6],
   
 ];
+```
 
 **Fix error: PageHeader.test.js confirm that the header renders**
 This test is looking for the text “Tic-Tac-Toe!” in the header, but the actual text in the header doesn’t have an exclamation mark on it. You will have to check with the marketing department to see which title is correct.
