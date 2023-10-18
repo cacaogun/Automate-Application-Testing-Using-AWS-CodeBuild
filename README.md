@@ -21,7 +21,7 @@ I cloned a mini tic-tac-toe react application. The manual process of fixing bugs
 The biggest issue is that there are no tests run during the build process. To make sure that my code builds complete as quickly as possible, so I want to run the test command before running the build command.
 Add the following command as the first command in the list of commands in the build phase.
 
-- npm run test:ci -- --coverage
+- ``npm run test:ci -- --coverage``
 - 
 ![image](https://github.com/cacaogun/Automate-Application-Testing-Using-AWS-CodeBuild/assets/103553102/aa9dba39-29b7-4b1e-a994-be9e35d14bf6)
 
