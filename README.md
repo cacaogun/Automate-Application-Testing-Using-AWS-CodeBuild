@@ -30,18 +30,31 @@ Add the following command as the first command in the list of commands in the bu
 With the change I just made, the build will only succeed if the application tests pass. The test results and failures are not as visible or easy to interpret as they can be yet. To increase visibility and clarity, CodeBuild has support to display test and coverage reports exported by frameworks. Test frameworks have been configured to create both types of reports that will export. At the end of the buildspec file, add the following reports section and save it.
 
 reports:
+
   web-application:
+  
     files:
+    
       - "clover.xml"
+      
     base-directory: "react-app/coverage"
+    
     discard-paths: yes
+    
     file-format: CLOVERXML
+    
   web-application-tests:
+  
     files:
+    
       - "junit.xml"
+      
     base-directory: "react-app"
+    
     discard-paths: yes
+    
     file-format: JUNITXML
+    
 Then commit changes locally and push them to the shared AWS CodeCommit repository.
 
 **DETERMINE WHERE YOUR BUILD IS FAILING**
@@ -58,15 +71,25 @@ Get back to the Cloud9 Terminal. We could see that two tests failed and seven te
 
 **Fix error: GameBoard.test.js the game can be won by X**
 On line 17 of the GameBoard.test.js, there is an array of possible winning combinations, it appears that the combination being tested, [0,3,6], is not there. Add these codes:
+
 wins = [
+
   [0, 1, 2],
+  
   [3, 4, 5],
+  
   [6, 7, 8],
+  
   [1, 4, 7],
+  
   [2, 5, 8],
+  
   [0, 4, 8],
+  
   [2, 4, 6],
+  
   [0, 3, 6],
+  
 ];
 
 **Fix error: PageHeader.test.js confirm that the header renders**
@@ -90,13 +113,20 @@ Jest looks for test files that end with .test.js. You will create your new test 
 I created App.test.js and paste the following code into it and save the file.
 
 import { render, screen } from "@testing-library/react";
+
 import App from "./App";
 
+
 describe("App.test.js", () => {
+
   test("renders App component", () => {
+  
     render(<App />);
+
   });
+  
 });
+
 
 That will cause the test runner to run your test and it will pass. This test just renders the App component. This works, and would actually give you 100% test coverage, but the scope of this test is too broad.
 
@@ -105,20 +135,35 @@ Since App.js renders sub-components, you want to make sure that a failure in one
 In the App.test.js file, after line 4, paste the following code.
 
 jest.mock("./GameBoard", () => {
+
   return function GameBoard(props) {
+  
     return <div data-testid="GameBoard">Gameboard</div>;
+    
   };
+  
 });
+
 jest.mock("./SupportInfo", () => {
+
   return function SupportInfo(props) {
+  
     return <div data-testid="SupportInfo">SupportInfo</div>;
+    
   };
+  
 });
+
 jest.mock("./PageHeader", () => {
+
   return function PageHeader(props) {
+  
     return <div data-testid="PageHeader">PageHeader</div>;
+    
   };
+  
 });
+
 
 The jest.mock will essentially intercept the calls to import those 3 modules and return the simple function included in the mock call instead of the contents of the requested files. For instance, instead of the test rendering the entire GameBoard, it only renders a div component with the text GameBoard in it.
 
