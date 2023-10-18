@@ -73,6 +73,7 @@ Get back to the Cloud9 Terminal. We could see that two tests failed and seven te
 
 **Fix error: GameBoard.test.js the game can be won by X**
 On line 17 of the GameBoard.test.js, there is an array of possible winning combinations, it appears that the combination being tested, [0,3,6], is not there. Add these codes:
+
 ```
 wins = [
 
@@ -114,6 +115,7 @@ I am going to create a test for the remaining file in the application. To get in
 
 Jest looks for test files that end with .test.js. You will create your new test file in the src directory following the naming convention that was established by the existing tests.
 I created App.test.js and paste the following code into it and save the file.
+
 ```
 import { render, screen } from "@testing-library/react";
 
