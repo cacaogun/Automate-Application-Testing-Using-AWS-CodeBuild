@@ -114,7 +114,7 @@ I am going to create a test for the remaining file in the application. To get in
 
 Jest looks for test files that end with .test.js. You will create your new test file in the src directory following the naming convention that was established by the existing tests.
 I created App.test.js and paste the following code into it and save the file.
-
+```
 import { render, screen } from "@testing-library/react";
 
 import App from "./App";
@@ -129,14 +129,14 @@ describe("App.test.js", () => {
   });
   
 });
-
+```
 
 That will cause the test runner to run your test and it will pass. This test just renders the App component. This works, and would actually give you 100% test coverage, but the scope of this test is too broad.
 
 Since App.js renders sub-components, you want to make sure that a failure in one of those doesn’t cause the parent test to fail. To handle this we will mock the sub-components. With the introduction of mocking, we are able to just do component testing and not integration testing. If the interaction between components is important, you can always create another test file that doesn’t use mocking.
 
 In the App.test.js file, after line 4, paste the following code.
-
+```
 jest.mock("./GameBoard", () => {
 
   return function GameBoard(props) {
@@ -166,7 +166,7 @@ jest.mock("./PageHeader", () => {
   };
   
 });
-
+```
 
 The jest.mock will essentially intercept the calls to import those 3 modules and return the simple function included in the mock call instead of the contents of the requested files. For instance, instead of the test rendering the entire GameBoard, it only renders a div component with the text GameBoard in it.
 
