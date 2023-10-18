@@ -29,7 +29,7 @@ Add the following command as the first command in the list of commands in the bu
 
 With the change I just made, the build will only succeed if the application tests pass. The test results and failures are not as visible or easy to interpret as they can be yet. To increase visibility and clarity, CodeBuild has support to display test and coverage reports exported by frameworks. Test frameworks have been configured to create both types of reports that will export. At the end of the buildspec file, add the following reports section and save it.
 
-``reports:
+`reports:
 
   web-application:
   
@@ -53,7 +53,7 @@ With the change I just made, the build will only succeed if the application test
     
     discard-paths: yes
     
-    file-format: JUNITXML``
+    file-format: JUNITXML`
     
 Then commit changes locally and push them to the shared AWS CodeCommit repository.
 
